@@ -1384,4 +1384,26 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 ///Trait given to atoms currently affected by projectile dampeners
 #define TRAIT_GOT_DAMPENED "got_dampened"
 
+/// humans with this trait will have their health visible to AIs without suit
+#define HUMAN_SENSORS_VISIBLE_WITHOUT_SUIT "hmsensorsvisiblewithoutsuit"
+/// Apply to movables to say "hey, this movable is technically flat on the floor, so it'd be mopped up by a mop"
+#define TRAIT_MOPABLE "mopable"
+
+/// Humans with this trait do not blink
+#define TRAIT_PREVENT_BLINKING "prevent_blinking"
+
+/// Prevents animations for blinking from looping
+#define TRAIT_PREVENT_BLINK_LOOPS "prevent_blink_loops"
+
+/// Mob doesn't get closed eyelids overlay when it gets knocked out cold or dies
+#define TRAIT_NO_EYELIDS "no_eyelids"
+
+/// Trait applied when the wire bundle component is added to an [/obj/item/integrated_circuit]
+#define TRAIT_COMPONENT_WIRE_BUNDLE "component_wire_bundle"
+
+/// Apply this trait to mobs which can buckle humans
+#define TRAIT_CAN_MOUNT_HUMANS "can_mount_humans"
+/// Apply this trait to mobs which can buckle cyborgs
+#define TRAIT_CAN_MOUNT_CYBORGS "can_mount_cyborgs"
+
 // END TRAIT DEFINES
