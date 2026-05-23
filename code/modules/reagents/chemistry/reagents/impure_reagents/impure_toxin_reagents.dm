@@ -11,12 +11,43 @@
 	description = "An extremely gross substance that induces vomiting. It is produced when Lipolicide reactions are impure."
 	ph = 7
 	liver_damage = 0
+	var/yuck_cycle = 0 //! The `current_cycle` when puking starts.
 
-/datum/reagent/impurity/ipecacide/on_mob_add(mob/living/carbon/owner)
-	if(owner.disgust >= DISGUST_LEVEL_GROSS)
-		return ..()
-	owner.adjust_disgust(50)
-	..()
+/datum/reagent/impurity/ipecacide/on_mob_add(mob/living/affected_mob)
+	if(HAS_TRAIT(affected_mob, TRAIT_NOHUNGER)) //they can't puke
+		holder.del_reagent(type)
+	return ..()
+
+#define YUCK_PUKE_CYCLES 3 // every X cycle is a puke
+#define YUCK_PUKES_TO_STUN 3 // hit this amount of pukes in a row to start stunning
+/datum/reagent/impurity/ipecacide/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+	. = ..()
+	if(!yuck_cycle)
+		if(SPT_PROB(4, seconds_per_tick))
+			var/dread = pick("Something is moving in your stomach...", \
+				"A wet growl echoes from your stomach...", \
+				"For a moment you feel like your surroundings are moving, but it's your stomach...")
+			to_chat(affected_mob, span_userdanger("[dread]"))
+			yuck_cycle = current_cycle
+	else
+		var/yuck_cycles = current_cycle - yuck_cycle
+		if(yuck_cycles % YUCK_PUKE_CYCLES == 0)
+			if(yuck_cycles >= YUCK_PUKE_CYCLES * YUCK_PUKES_TO_STUN)
+				if(holder)
+					holder.remove_reagent(type, 3)
+			var/passable_flags = (MOB_VOMIT_MESSAGE | MOB_VOMIT_HARM)
+			if(yuck_cycles >= (YUCK_PUKE_CYCLES * YUCK_PUKES_TO_STUN))
+				passable_flags |= MOB_VOMIT_STUN
+			affected_mob.vomit(vomit_flags = passable_flags, lost_nutrition = rand(14, 26))
+
+#undef YUCK_PUKE_CYCLES
+#undef YUCK_PUKES_TO_STUN
+
+/datum/reagent/impurity/ipecacide/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	yuck_cycle = 0 // reset vomiting
+
+	return ..()
 
 //Formaldehyde - Impure Version
 /datum/reagent/impurity/methanol
