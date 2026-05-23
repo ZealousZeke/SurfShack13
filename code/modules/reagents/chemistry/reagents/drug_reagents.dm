@@ -897,18 +897,18 @@
 
 /datum/reagent/drug/rotatium/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
-	if(!affected_mob.hud_used)
+	if(!affected_mob.hud_used || (current_cycle % 10))
 		return
 	var/atom/movable/plane_master_controller/pm_controller = affected_mob.hud_used.plane_master_controllers[PLANE_MASTERS_GAME]
 
-	var/rotation = min(round(current_cycle/20), 89) // By this point the player is probably puking and quitting anyway
+	var/rotation = max(5, min(round(current_cycle/20), 89)) // By this point the player is probably puking and quitting anyway
 	for(var/atom/movable/screen/plane_master/plane as anything in pm_controller.get_planes())
-		animate(plane, transform = matrix(rotation, MATRIX_ROTATE), time = 5, easing = QUAD_EASING, loop = -1)
-		animate(transform = matrix(-rotation, MATRIX_ROTATE), time = 5, easing = QUAD_EASING)
+		animate(plane, transform = matrix(rotation, MATRIX_ROTATE), time = 9, easing = QUAD_EASING, loop = -1)
+		animate(transform = matrix(-rotation, MATRIX_ROTATE), time = 9, easing = QUAD_EASING)
 
 /datum/reagent/drug/rotatium/on_mob_end_metabolize(mob/living/affected_mob)
 	. = ..()
 	if(affected_mob?.hud_used)
 		var/atom/movable/plane_master_controller/pm_controller = affected_mob.hud_used.plane_master_controllers[PLANE_MASTERS_GAME]
 		for(var/atom/movable/screen/plane_master/plane as anything in pm_controller.get_planes())
-			animate(plane, transform = matrix(), time = 5, easing = QUAD_EASING)
+			animate(plane, transform = matrix(), time = 9, easing = QUAD_EASING)
