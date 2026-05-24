@@ -273,11 +273,8 @@
 	poor_monkey.forceMove(src)
 	manipulator_arm.vis_contents += poor_monkey
 	poor_monkey.dir = manipulator_arm.dir
-	poor_monkey.add_offsets(
-		type,
-		x_add = 32 + manipulator_arm.calculate_item_offset(TRUE, pixels_to_offset = 16),
-		y_add = 32 + manipulator_arm.calculate_item_offset(FALSE, pixels_to_offset = 16)
-	)
+	poor_monkey.pixel_x = 32 + manipulator_arm.calculate_item_offset(TRUE, pixels_to_offset = 16)
+	poor_monkey.pixel_y = 32 + manipulator_arm.calculate_item_offset(FALSE, pixels_to_offset = 16)
 
 /obj/machinery/big_manipulator/attackby(obj/item/is_card, mob/user, params)
 	. = ..()
