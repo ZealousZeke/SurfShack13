@@ -1835,10 +1835,8 @@
 		holder.remove_reagent(opiate, 3 * REM * seconds_per_tick)
 
 	affected_mob.clear_mood_event("numb")
-	affected_mob.add_mood_event("not numb", /datum/mood_event/antinarcotic_medium)
-
 	affected_mob.clear_mood_event("smacked out")
-	affected_mob.add_mood_event("not smacked out", /datum/mood_event/antinarcotic_heavy)
+	affected_mob.add_mood_event("not numb", /datum/mood_event/antinarcotic_medium)
 
 	affected_mob.adjust_drowsiness(-5 SECONDS * REM * seconds_per_tick)
 	if(affected_mob.losebreath >= 1)
