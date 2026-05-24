@@ -218,8 +218,6 @@
 	color = "#FAFAFA"
 	overdose_threshold = 20
 	taste_description = "salt" // because they're bathsalts?
-	inverse_chem_val = 0.3
-	inverse_chem = /datum/reagent/inverse/bath_salts
 	addiction_types = list(/datum/addiction/stimulants = 25)  //8 per 2 seconds
 	ph = 8.2
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED

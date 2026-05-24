@@ -623,23 +623,6 @@
 			to_chat(maybe_monkey, span_danger("You vomit out blood, making you feel grossly monkeyish."))
 	new /mob/living/carbon/human/species/monkey(location, TRUE)
 
-/datum/chemical_reaction/angry_monkey
-	required_reagents = list(/datum/reagent/monkey_powder = 50, /datum/reagent/inverse/bath_salts = 10)
-	reaction_flags = REACTION_INSTANT
-	mix_message = span_danger("Expands into a brown mass before shaping itself into a pissed off monkey!")
-
-/datum/chemical_reaction/angry_monkey/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
-	var/mob/living/carbon/maybe_monkey = holder.my_atom
-	var/location = maybe_monkey.drop_location()
-	if(iscarbon(maybe_monkey))
-		if(ismonkey(maybe_monkey))
-			maybe_monkey.gib(DROP_ALL_REMAINS)
-			to_chat(maybe_monkey, span_danger("You body is torn to shreds as a pissed off monkey bursts out of you!"))
-		else
-			maybe_monkey.vomit(VOMIT_CATEGORY_BLOOD)
-			to_chat(maybe_monkey, span_danger("You vomit out blood, making you feel grossly monkeyish."))
-	new /mob/living/carbon/human/species/monkey/angry(location, TRUE)
-
 //water electrolysis
 /datum/chemical_reaction/electrolysis
 	results = list(/datum/reagent/oxygen = 2.5, /datum/reagent/hydrogen = 5)

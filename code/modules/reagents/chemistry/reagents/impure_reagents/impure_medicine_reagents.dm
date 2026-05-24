@@ -902,7 +902,7 @@ Basically, we fill the time between now and 2s from now with hands based off the
 
 /datum/reagent/inverse/rezadone/on_mob_end_metabolize(mob/living/carbon/affected_mob)
 	. = ..()
-	affected_mob.cure_trauma_type(/datum/brain_trauma/mild/phobia/fish, resilience = TRAUMA_RESILIENCE_ABSOLUTE)
+	affected_mob.cure_trauma_type(/datum/brain_trauma/mild/phobia/carps, resilience = TRAUMA_RESILIENCE_ABSOLUTE)
 
 /datum/reagent/inverse/krokodil
 	name = "Permonid"
@@ -939,52 +939,6 @@ Basically, we fill the time between now and 2s from now with hands based off the
 	if(SPT_PROB(5, seconds_per_tick))
 		to_chat(affected_mob, span_warning("The muscles in your arms give out!"))
 		affected_mob.drop_all_held_items()
-
-/datum/reagent/inverse/bath_salts
-	name = "Monkey Dust"
-	description = "Oop aak chee aak eek chee. Eek aak oop chee oop aak aak!!"
-	color = "#7e3900"
-	ph = 14
-	metabolization_rate = 0.2 * REM
-	tox_damage = 0
-	/// The martial art we teach (to monkies)
-	var/datum/martial_art/jungle_arts/jungle_arts
-
-/datum/reagent/inverse/bath_salts/on_mob_metabolize(mob/living/carbon/affected_mob)
-	. = ..()
-	if(is_simian(affected_mob))
-		affected_mob.gain_trauma(/datum/brain_trauma/special/primal_instincts, TRAUMA_RESILIENCE_ABSOLUTE)
-		affected_mob.add_traits(list(TRAIT_STUNIMMUNE, TRAIT_SLEEPIMMUNE, TRAIT_ANALGESIA, TRAIT_STIMULATED), type)
-		jungle_arts = new(src)
-		jungle_arts.locked_to_use = TRUE
-		jungle_arts.teach(affected_mob)
-
-/datum/reagent/inverse/bath_salts/on_mob_end_metabolize(mob/living/carbon/affected_mob)
-	. = ..()
-	QDEL_NULL(jungle_arts)
-	if(is_simian(affected_mob))
-		affected_mob.cure_trauma_type(/datum/brain_trauma/special/primal_instincts, resilience = TRAUMA_RESILIENCE_ABSOLUTE)
-		affected_mob.remove_traits(list(TRAIT_STUNIMMUNE, TRAIT_SLEEPIMMUNE, TRAIT_ANALGESIA, TRAIT_STIMULATED), type)
-		affected_mob.Sleeping(30 SECONDS)
-
-/datum/reagent/inverse/bath_salts/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
-	. = ..()
-	if(holder.has_reagent(/datum/reagent/drug/bath_salts))
-		holder.remove_reagent(type, volume)
-		return
-
-	if(is_simian(affected_mob))
-		var/need_mob_update
-		need_mob_update = affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 5 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags)
-
-		if(holder.has_reagent(/datum/reagent/consumable/monkey_energy))
-			need_mob_update += affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 5 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags)
-
-		if(need_mob_update)
-			. = UPDATE_MOB_HEALTH
-
-	else if(SPT_PROB(10, seconds_per_tick))
-		affected_mob.emote(pick("screech","scratch","jump","look"))
 
 /datum/reagent/inverse/aranesp
 	name = "Epoetin Alfa"
