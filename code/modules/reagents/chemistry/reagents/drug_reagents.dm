@@ -895,7 +895,7 @@
 	creation_purity = REAGENT_STANDARD_PURITY
 	purity = REAGENT_STANDARD_PURITY
 	color = "#AC88CA" //RGB: 172, 136, 202
-	overdose_threshold = 25
+	overdose_threshold = 20
 	metabolization_rate = REAGENTS_METABOLISM
 	ph = 6.2
 	taste_description = "spinning"
