@@ -234,3 +234,12 @@
       with mitigating drowsiness and breath loss. Also purges good moodlets associated
       with opiates and replaces them with negative moodlets, so don''t expect your
       patient to be happy about losing their high!'
+2026-05-28:
+  JohnFulpWillard:
+  - rscadd: Added flags of Wales, Scotland and Quebec to OOC.
+  ZealousZeke:
+  - balance: rebalanced rotatium into a drug instead of it being a shitty poison.
+  hyperjll:
+  - sound: Cyborg players recieve a unique sound effect only audible to them when
+      they're emagged.
+  - bugfix: Fixes nanite healing programs not healing any burn damage.
