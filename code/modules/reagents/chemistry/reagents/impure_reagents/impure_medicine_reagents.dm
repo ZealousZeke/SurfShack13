@@ -1037,7 +1037,7 @@ Basically, we fill the time between now and 2s from now with hands based off the
 	description = "Causes severe depressive behavior in users, and actively purges other antidepressants."
 	color = "#0004ff"
 	ph = 12
-	metabolization_rate = 0.5 * REM
+	metabolization_rate = 0.4 * REM
 	tox_damage = 0
 	penetrates_skin = TOUCH|VAPOR
 
