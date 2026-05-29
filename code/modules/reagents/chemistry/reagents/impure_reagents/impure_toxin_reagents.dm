@@ -9,7 +9,7 @@
 /datum/reagent/impurity/ipecacide
 	name = "Ipecacide"
 	description = "An extremely gross substance that induces vomiting. It is produced when Lipolicide reactions are impure."
-	metabolization_rate = REAGENTS_METABOLISM
+	metabolization_rate = 2 * REAGENTS_METABOLISM
 	overdose_threshold = 35
 	ph = 7
 	liver_damage = 0
