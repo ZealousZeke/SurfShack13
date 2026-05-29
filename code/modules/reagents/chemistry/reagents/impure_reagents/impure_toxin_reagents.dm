@@ -9,45 +9,72 @@
 /datum/reagent/impurity/ipecacide
 	name = "Ipecacide"
 	description = "An extremely gross substance that induces vomiting. It is produced when Lipolicide reactions are impure."
+	overdose_threshold = 40
 	ph = 7
 	liver_damage = 0
-	var/yuck_cycle = 0 //! The `current_cycle` when puking starts.
+	var/yuck_cycle = 0 //! The `current_cycle` when puking starts
 
 /datum/reagent/impurity/ipecacide/on_mob_add(mob/living/affected_mob)
-	if(HAS_TRAIT(affected_mob, TRAIT_NOHUNGER)) //they can't puke
+	if(HAS_TRAIT(affected_mob, TRAIT_NOHUNGER))
 		holder.del_reagent(type)
 	return ..()
 
-#define YUCK_PUKE_CYCLES 3 // every X cycle is a puke
-#define YUCK_PUKES_TO_STUN 3 // hit this amount of pukes in a row to start stunning
+#define YUCK_PUKE_CYCLES 3
+#define YUCK_PUKES_TO_STUN 2
+
 /datum/reagent/impurity/ipecacide/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
+
 	if(!yuck_cycle)
-		if(SPT_PROB(4, seconds_per_tick))
-			var/dread = pick("Something is moving in your stomach...", \
-				"A wet growl echoes from your stomach...", \
+		if(!yuck_cycle && current_cycle >= 3)
+			var/dread = pick(
+				"Something is moving in your stomach...",
+				"A wet growl echoes from your stomach...",
 				"For a moment you feel like your surroundings are moving, but it's your stomach...")
 			to_chat(affected_mob, span_userdanger("[dread]"))
 			yuck_cycle = current_cycle
-	else
-		var/yuck_cycles = current_cycle - yuck_cycle
-		if(yuck_cycles % YUCK_PUKE_CYCLES == 0)
-			if(yuck_cycles >= YUCK_PUKE_CYCLES * YUCK_PUKES_TO_STUN)
-				if(holder)
-					holder.remove_reagent(type, 3)
-			var/passable_flags = (MOB_VOMIT_MESSAGE | MOB_VOMIT_HARM)
-			if(yuck_cycles >= (YUCK_PUKE_CYCLES * YUCK_PUKES_TO_STUN))
-				passable_flags |= MOB_VOMIT_STUN
-			affected_mob.vomit(vomit_flags = passable_flags, lost_nutrition = rand(14, 26))
+		return
+
+	var/yuck_cycles = current_cycle - yuck_cycle
+
+	var/toxin_chem_amount = 0
+	for(var/datum/reagent/toxin/target_reagent in affected_mob.reagents.reagent_list)
+		toxin_chem_amount += 1
+		affected_mob.reagents.remove_reagent(target_reagent.type, 6 * target_reagent.purge_multiplier * REM * seconds_per_tick)
+
+	if(toxin_chem_amount == 0)
+		for(var/datum/reagent/impurity/ipecacide/target_reagent in affected_mob.reagents.reagent_list)
+			affected_mob.reagents.remove_reagent(target_reagent.type, 1 * REM * seconds_per_tick)
+
+	if(yuck_cycles % YUCK_PUKE_CYCLES == 0)
+
+		if(yuck_cycles >= YUCK_PUKE_CYCLES * YUCK_PUKES_TO_STUN)
+			if(holder)
+				holder.remove_reagent(type, 3)
+
+		var/passable_flags = (MOB_VOMIT_MESSAGE | MOB_VOMIT_HARM)
+
+		if(yuck_cycles >= (YUCK_PUKE_CYCLES * YUCK_PUKES_TO_STUN))
+			passable_flags |= MOB_VOMIT_STUN
+
+		affected_mob.vomit(
+			vomit_flags = passable_flags,
+			lost_nutrition = rand(14, 26)
+		)
 
 #undef YUCK_PUKE_CYCLES
 #undef YUCK_PUKES_TO_STUN
 
 /datum/reagent/impurity/ipecacide/on_mob_end_metabolize(mob/living/affected_mob)
 	. = ..()
-	yuck_cycle = 0 // reset vomiting
+	yuck_cycle = 0
 
-	return ..()
+/datum/reagent/impurity/ipecacide/overdose_process(mob/living/affected_mob, seconds_per_tick, times_fired)
+	. = ..()
+
+	affected_mob.reagents.remove_reagent(type, 2 * REM * seconds_per_tick)
+	affected_mob.adjustOrganLoss(ORGAN_SLOT_STOMACH, 1 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags)
+	affected_mob.adjustOrganLoss(ORGAN_SLOT_HEART, 0.5 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags)
 
 //Formaldehyde - Impure Version
 /datum/reagent/impurity/methanol
