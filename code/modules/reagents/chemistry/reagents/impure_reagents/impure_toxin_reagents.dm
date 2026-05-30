@@ -10,7 +10,7 @@
 	name = "Ipecacide"
 	description = "An extremely gross substance that induces vomiting. It is produced when Lipolicide reactions are impure."
 	metabolization_rate = 2 * REAGENTS_METABOLISM
-	overdose_threshold = 35
+	overdose_threshold = 25
 	ph = 7
 	liver_damage = 0
 	var/yuck_cycle = 0 //! The `current_cycle` when puking starts
@@ -44,13 +44,13 @@
 	for(var/datum/reagent/target_reagent as anything in affected_mob.reagents.reagent_list)
 		if(istype(target_reagent, /datum/reagent/impurity/ipecacide))
 			continue
-		affected_mob.reagents.remove_reagent(target_reagent.type, 5 * target_reagent.purge_multiplier * REM * seconds_per_tick)
+		affected_mob.reagents.remove_reagent(target_reagent.type, 4 * target_reagent.purge_multiplier * REM * seconds_per_tick)
 
 	if(yuck_cycles % YUCK_PUKE_CYCLES == 0)
 
 		if(yuck_cycles >= YUCK_PUKE_CYCLES * YUCK_PUKES_TO_STUN)
 			if(holder)
-				holder.remove_reagent(type, 2)
+				holder.remove_reagent(type, 3)
 
 		var/passable_flags = (MOB_VOMIT_MESSAGE | MOB_VOMIT_HARM)
 
@@ -72,9 +72,9 @@
 /datum/reagent/impurity/ipecacide/overdose_process(mob/living/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 
-	affected_mob.reagents.remove_reagent(type, 2 * REM * seconds_per_tick)
-	affected_mob.adjustOrganLoss(ORGAN_SLOT_STOMACH, 1.5 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags)
-	affected_mob.adjustOrganLoss(ORGAN_SLOT_HEART, 1 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags)
+	affected_mob.reagents.remove_reagent(type, 6 * REM * seconds_per_tick)
+	affected_mob.adjustOrganLoss(ORGAN_SLOT_STOMACH, 2 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags)
+	affected_mob.adjustOrganLoss(ORGAN_SLOT_HEART, 1.5 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags)
 
 //Formaldehyde - Impure Version
 /datum/reagent/impurity/methanol
