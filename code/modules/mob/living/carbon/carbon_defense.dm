@@ -419,7 +419,7 @@
 					span_notice("You check yourself for shrapnel."), visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE)
 			var/harmless = weapon.get_embed().is_harmless()
 			var/stuck_wordage = harmless ? "stuck to" : "embedded in"
-			var/embed_text = "\t <a href='?src=[REF(src)];embedded_object=[REF(weapon)];embedded_limb=[REF(limb)]'> There is [icon2html(weapon, src)] \a [weapon] [stuck_wordage] your [limb.plaintext_zone]!</a>"
+			var/embed_text = "\t <a href='byond://?src=[REF(src)];embedded_object=[REF(weapon)];embedded_limb=[REF(limb)]'> There is [icon2html(weapon, src)] \a [weapon] [stuck_wordage] your [limb.plaintext_zone]!</a>"
 			if (harmless)
 				to_chat(src, span_italics(span_notice(embed_text)))
 			else
