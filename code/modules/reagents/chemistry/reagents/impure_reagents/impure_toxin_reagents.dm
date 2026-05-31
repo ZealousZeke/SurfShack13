@@ -21,7 +21,7 @@
 	return ..()
 
 #define YUCK_PUKE_CYCLES 3
-#define YUCK_PUKES_TO_STUN 2
+#define YUCK_PUKES_TO_STUN 3
 
 /datum/reagent/impurity/ipecacide/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
