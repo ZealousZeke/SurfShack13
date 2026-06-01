@@ -42,7 +42,7 @@
 ///This affects ALL reagents now
 /datum/reagent/catalyst_agent/speed/palladium
 	name = "Palladium Synthate Catalyst"
-	description = "This catalyst reagent will speed up all medicine reactions that it shares a beaker with by a dramatic amount."
+	description = "This catalyst reagent will increase the speed of reactions that it shares a beaker with by a dramatic amount."
 	target_reagent_type = /datum/reagent
 	modifier = 6
 	ph = 7
@@ -50,7 +50,7 @@
 
 /datum/reagent/catalyst_agent/speed/tempomyocin
 	name = "Tempomyocin"
-	description = "This reagent will consume itself and speed up an ongoing reaction, modifying the current reaction's purity by its own."
+	description = "This catalyst reagent will reduce the speed of reactions that it shares a beaker with by a dramatic amount."
 	target_reagent_type = /datum/reagent
 	modifier = 0.15
 	ph = 7
