@@ -44,7 +44,7 @@
 	name = "Palladium Synthate Catalyst"
 	description = "This catalyst reagent will increase the speed of reactions that it shares a beaker with by a dramatic amount."
 	target_reagent_type = /datum/reagent
-	modifier = 6
+	modifier = 5
 	ph = 7
 	color = "#b1b1b1"
 

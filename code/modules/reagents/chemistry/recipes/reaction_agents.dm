@@ -13,7 +13,7 @@
 	ph_exponent_factor = 0
 	thermic_constant = 0
 	H_ion_release = 0.01
-	rate_up_lim = 15
+	rate_up_lim = 20
 	purity_min = 0
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_CHEMICAL
 

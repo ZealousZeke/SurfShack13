@@ -77,11 +77,10 @@
 
 /datum/reagent/prefactor_a
 	name = "Interim Product Alpha"
-	description = "This reagent is a prefactor to palladium synthate catalyst."
+	description = "This reagent is a prefactor to palladium synthate catalyst, and will react with stable plasma to create it."
 	color = "#bafa69"
 
 /datum/reagent/prefactor_b
 	name = "Interim Product Beta"
-	description = "This reagent is a prefactor to tempomyocin."
-	color = "#8a3aa9"
+	description = "This reagent is a prefactor to tempomyocin, and will react with stable plasma to create it."
 	color = "#8a3aa9"
