@@ -1,0 +1,6 @@
+author: "hyperjll"
+delete-after: True
+changes:
+  - rscadd: "Added all the previously non-existent Departmental Budget Cards."
+  - rscadd: "Bank Machines can now accept departmental budget cards to switch between department accounts."
+  - rscadd: "The Syndicate may task it's agents to steal any of the station's departmental budget cards."
