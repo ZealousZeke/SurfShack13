@@ -48,3 +48,6 @@
   - rscadd: PubbyStation's Armory now has a Grenade Launcher.
   - rscadd: Adds the Grenade Launcher to the uplink for traitor Chemists and Chief
       Medical Officers for 9 TC.
+2026-06-03:
+  cocothegogo:
+  - bugfix: 'MiniSurf: fixed the grav gen not being wired correctly'
