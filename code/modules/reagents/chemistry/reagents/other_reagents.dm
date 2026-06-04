@@ -1253,7 +1253,7 @@
 	/// How much tox damage to deal per tick
 	var/tox_damage = 0.5
 	/// How radioactive is this reagent
-	var/rad_power = 1
+	var/rad_power = 3
 
 /datum/reagent/uranium/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()

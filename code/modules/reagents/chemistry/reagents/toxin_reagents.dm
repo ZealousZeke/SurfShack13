@@ -595,12 +595,12 @@
 	toxpwr = 0
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED|REAGENT_NO_RANDOM_RECIPE
 	/// How radioactive is this reagent
-	var/rad_power = 3
+	var/rad_power = 4
 
 /datum/reagent/toxin/polonium/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	if(!HAS_TRAIT(affected_mob, TRAIT_IRRADIATED) && SSradiation.can_irradiate_basic(affected_mob))
-		var/chance = min(volume / (20 - rad_power * 5), rad_power)
+		var/chance = min(volume / (25 - rad_power * 5), rad_power)
 		if(SPT_PROB(chance, seconds_per_tick)) // ignore rad protection calculations bc it's inside of us
 			affected_mob.AddComponent(/datum/component/irradiated)
 	else
