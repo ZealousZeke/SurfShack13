@@ -1,0 +1,5 @@
+author: "hyperjll"
+delete-after: True
+changes:
+  - balance: "Nanite point generation per person has been reduced from 1.5 to 1."
+  - balance: "The nanite program 'Paralysis' now has a grace period before activation, and ramps its cost up while activated to ensure no stunlocks."
