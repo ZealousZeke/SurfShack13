@@ -1,0 +1,4 @@
+author: "hyperjll"
+delete-after: True
+changes:
+  - bugfix: "Diagnostic vision now reveals nanite supply once more."

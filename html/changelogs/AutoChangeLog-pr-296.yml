@@ -1,0 +1,5 @@
+author: "hyperjll"
+delete-after: True
+changes:
+  - bugfix: "Rainbow slime + slime jelly reactions will no longer leave behind slime extracts that are partially full, and thus won't activate."
+  - bugfix: "Same fix but for self-sustaining extracts as well."

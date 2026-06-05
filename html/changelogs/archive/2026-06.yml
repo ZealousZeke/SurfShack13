@@ -48,3 +48,29 @@
   - rscadd: PubbyStation's Armory now has a Grenade Launcher.
   - rscadd: Adds the Grenade Launcher to the uplink for traitor Chemists and Chief
       Medical Officers for 9 TC.
+2026-06-03:
+  cocothegogo:
+  - bugfix: 'MiniSurf: fixed the grav gen not being wired correctly'
+2026-06-04:
+  Jacquerel:
+  - bugfix: Folding a wheelchair will no longer destroy attached bells or bombs.
+  breadcrombs:
+  - balance: EMP's will have the same size as the volume it was created in and no
+      longer two thirds of it.
+  hyperjll:
+  - bugfix: Fixes the nanite program 'Distributed Computing' causing frequent periods
+      of lag, preventing point generation.
+  - balance: Nanite point generation per person has been reduced from 1.5 to 1.
+  - balance: The nanite program 'Paralysis' now has a grace period before activation,
+      and ramps its cost up while activated to ensure no stunlocks.
+  - rscadd: Added all the previously non-existent Departmental Budget Cards.
+  - rscadd: Bank Machines can now accept departmental budget cards to switch between
+      department accounts.
+  - rscadd: The Syndicate may task it's agents to steal any of the station's departmental
+      budget cards.
+2026-06-05:
+  hyperjll:
+  - rscadd: Added a LOT of new Listings to the Pre-Round Store.
+  - rscadd: Three new implant types unique to the Pre-Round Store (for now).
+  - balance: Many items on the Pre-Round store have seen price reductions.
+  - balance: Antag tokens in the pre-round store cost substantially more.
