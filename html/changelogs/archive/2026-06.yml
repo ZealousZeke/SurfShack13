@@ -141,3 +141,6 @@
   - bugfix: Fixed some nanite program descriptions.
   - bugfix: You now drop all of your stuff when using certain antag tokens, to ensure
       you're given all of the gear you SHOULD have been given.
+2026-06-07:
+  IndieanaJones:
+  - bugfix: Fixes the Desired Role Bonus.
