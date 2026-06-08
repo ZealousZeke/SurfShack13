@@ -242,10 +242,14 @@ Basically, we fill the time between now and 2s from now with hands based off the
 ///We're done - remove the curse
 /datum/reagent/inverse/aiuri/on_mob_end_metabolize(mob/living/affected_mob)
 	qdel(affected_mob.GetComponent(/datum/component/manual_blinking/overdrive))
-	..()
-	affected_mob.get_organ_slot(ORGAN_SLOT_EYES)?.apply_organ_damage(-30)
+
+	var/obj/item/organ/eyes/eyes = affected_mob.get_organ_slot(ORGAN_SLOT_EYES)
+	eyes?.apply_organ_damage(-30)
+
 	REMOVE_TRAIT(affected_mob, TRAIT_XRAY_VISION, type)
 	affected_mob.update_sight()
+
+	..()
 
 //Hercuri
 //inverse
