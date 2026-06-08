@@ -15,8 +15,8 @@
 	thermic_constant = 200
 	H_ion_release = -3
 	rate_up_lim = 15
-	purity_min = 0.5
-	reaction_flags = REACTION_PH_VOL_CONSTANT
+	purity_min = 0.25
+	reaction_flags = REACTION_PH_VOL_CONSTANT | REACTION_CLEAR_INVERSE
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_DAMAGING | REACTION_TAG_CHEMICAL | REACTION_TAG_BRUTE | REACTION_TAG_TOXIN
 
 /datum/chemical_reaction/fentanyl

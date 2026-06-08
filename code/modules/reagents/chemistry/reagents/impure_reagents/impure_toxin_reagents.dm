@@ -79,7 +79,7 @@
 //Formaldehyde - Impure Version
 /datum/reagent/impurity/methanol
 	name = "Methanol"
-	description = "A light, colourless liquid with a distinct smell. Ingestion can lead to blindness. It is a byproduct of organisms processing impure Formaldehyde."
+	description = "A light, colourless liquid with a distinct smell. Ingestion can lead to blindness."
 	reagent_state = LIQUID
 	color = "#aae7e4"
 	ph = 7
@@ -87,9 +87,23 @@
 
 /datum/reagent/impurity/methanol/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
+	if(!affected_mob)
+		return
 	var/obj/item/organ/eyes/eyes = affected_mob.get_organ_slot(ORGAN_SLOT_EYES)
-	if(eyes?.apply_organ_damage(0.5 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags))
-		return UPDATE_MOB_HEALTH
+	eyes?.apply_organ_damage(0.5 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags)
+
+	if(SPT_PROB(20, seconds_per_tick))
+		to_chat(affected_mob, span_warning("Your head aches as your vision blurs."))
+		affected_mob.adjust_eye_blur(5 SECONDS * REM * seconds_per_tick)
+		affected_mob.adjust_confusion_up_to(5 SECONDS, 20 SECONDS)
+		affected_mob.adjust_hallucinations(10 SECONDS)
+		affected_mob.emote(pick("stare","drool","moan","look"))
+		affected_mob.adjustToxLoss(2 * REM * seconds_per_tick, updating_health = FALSE, required_biotype = affected_biotype)
+
+/datum/reagent/impurity/methanol/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume)
+	. = ..()
+	if(isliving(exposed_mob) && (methods & (TOUCH|VAPOR|PATCH)))
+		exposed_mob.adjust_fire_stacks(min(reac_volume/4, 20))
 
 //Chloral Hydrate - Impure Version
 /datum/reagent/impurity/chloralax

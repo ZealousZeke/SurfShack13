@@ -1065,7 +1065,7 @@
 	overdose_threshold = 15
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	purity = REAGENT_STANDARD_PURITY
-	inverse_chem = /datum/reagent/inverse
+	inverse_chem = /datum/reagent/impurity/mannitol
 	inverse_chem_val = 0.45
 	metabolized_traits = list(TRAIT_TUMOR_SUPPRESSED) //Having mannitol in you will pause the brain damage from brain tumor (so it heals an even 2 brain damage instead of 1.8)
 

@@ -91,3 +91,27 @@
 		warn_grace = FALSE
 		warn_dying = FALSE
 		last_blink = world.time
+
+//This is used for aivime, the inverse of aiuri.
+/datum/component/manual_blinking/overdrive
+	dupe_mode = COMPONENT_DUPE_UNIQUE
+	warn_grace = FALSE
+	warn_dying = FALSE
+	last_blink
+	check_every = 3 SECONDS
+	grace_period = 1 SECONDS
+	damage_rate = 3 // organ damage taken per tick
+
+/datum/component/manual_blinking/overdrive/process()
+	var/mob/living/carbon/C = parent
+
+	if(world.time > (last_blink + check_every + grace_period))
+		if(!warn_dying)
+			to_chat(C, span_userdanger("Your eyes begin to wither, you need to blink!"))
+			warn_dying = TRUE
+
+		E.apply_organ_damage(damage_rate)
+	else if(world.time > (last_blink + check_every))
+		if(!warn_grace)
+			to_chat(C, span_danger("You feel a need to blink!"))
+			warn_grace = TRUE
