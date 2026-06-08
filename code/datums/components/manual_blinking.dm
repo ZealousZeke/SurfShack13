@@ -102,6 +102,18 @@
 	grace_period = 1 SECONDS
 	damage_rate = 5 // organ damage taken per tick
 
+/datum/component/manual_blinking/overdrive/Initialize()
+	if(!iscarbon(parent))
+		return COMPONENT_INCOMPATIBLE
+
+	var/mob/living/carbon/C = parent
+	E = C.get_organ_slot(ORGAN_SLOT_EYES)
+
+	if(E)
+		START_PROCESSING(SSdcs, src)
+		last_blink = world.time
+		to_chat(C, span_userdanger("You suddenly realize you're blinking manually."))
+
 /datum/component/manual_blinking/overdrive/process()
 	var/mob/living/carbon/C = parent
 
