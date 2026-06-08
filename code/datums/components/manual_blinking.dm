@@ -100,7 +100,7 @@
 	last_blink
 	check_every = 3 SECONDS
 	grace_period = 1 SECONDS
-	damage_rate = 3 // organ damage taken per tick
+	damage_rate = 5 // organ damage taken per tick
 
 /datum/component/manual_blinking/overdrive/process()
 	var/mob/living/carbon/C = parent
