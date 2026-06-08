@@ -1,5 +1,5 @@
 #define CHALLENGE_TELECRYSTALS 280
-#define CHALLENGE_TIME_LIMIT (5 MINUTES)
+#define CHALLENGE_TIME_LIMIT (120 MINUTES)
 #define CHALLENGE_SHUTTLE_DELAY (25 MINUTES) // 25 minutes, so the ops have at least 5 minutes before the shuttle is callable.
 
 GLOBAL_LIST_EMPTY(jam_on_wardec)
