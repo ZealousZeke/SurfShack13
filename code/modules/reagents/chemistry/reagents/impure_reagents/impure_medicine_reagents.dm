@@ -244,7 +244,8 @@ Basically, we fill the time between now and 2s from now with hands based off the
 	qdel(affected_mob.GetComponent(/datum/component/manual_blinking/overdrive))
 
 	var/obj/item/organ/eyes/eyes = affected_mob.get_organ_slot(ORGAN_SLOT_EYES)
-	eyes?.apply_organ_damage(-30)
+	if(effect_applied)
+		eyes?.apply_organ_damage(-30)
 
 	REMOVE_TRAIT(affected_mob, TRAIT_XRAY_VISION, type)
 	affected_mob.update_sight()

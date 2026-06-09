@@ -412,6 +412,8 @@
 	metabolization_rate = 0.75 * REAGENTS_METABOLISM
 	overdose_threshold = 6
 	ph = 8.6
+	inverse_chem_val = 0.4
+	inverse_chem = /datum/reagent/inverse/healing/syriniver
 	var/conversion_amount
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
