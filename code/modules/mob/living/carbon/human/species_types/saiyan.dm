@@ -3,10 +3,10 @@
 /datum/species/saiyan
 	name = "\improper Saiyan"
 	id = SPECIES_SAIYAN
-	mutanteyes = /obj/item/organ/internal/eyes/saiyan
-	mutantbrain = /obj/item/organ/internal/brain/saiyan
-	mutantheart = /obj/item/organ/internal/heart/saiyan
-	mutantstomach = /obj/item/organ/internal/stomach/saiyan
+	mutanteyes = /obj/item/organ/eyes/saiyan
+	mutantbrain = /obj/item/organ/brain/saiyan
+	mutantheart = /obj/item/organ/heart/saiyan
+	mutantstomach = /obj/item/organ/stomach/saiyan
 	payday_modifier = 2.0
 	inherent_traits = list(
 		TRAIT_CATLIKE_GRACE,
@@ -24,8 +24,8 @@
 		BODY_ZONE_L_LEG = /obj/item/bodypart/leg/left/saiyan,
 		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right/saiyan,
 	)
-	external_organs = list(
-		/obj/item/organ/external/tail/monkey/saiyan = "Saiyan",
+	mutant_organs = list(
+		/obj/item/organ/tail/monkey/saiyan = "Saiyan",
 	)
 
 /datum/species/saiyan/prepare_human_for_preview(mob/living/carbon/human/human)
@@ -38,22 +38,22 @@
 /datum/species/saiyan/get_scream_sound(mob/living/carbon/human/human)
 	if(human.physique == MALE)
 		if(prob(1))
-			return 'sound/voice/human/wilhelm_scream.ogg'
+			return 'sound/mobs/humanoids/human/scream/wilhelm_scream.ogg'
 		return pick(
-			'sound/voice/human/malescream_1.ogg',
-			'sound/voice/human/malescream_2.ogg',
-			'sound/voice/human/malescream_3.ogg',
-			'sound/voice/human/malescream_4.ogg',
-			'sound/voice/human/malescream_5.ogg',
-			'sound/voice/human/malescream_6.ogg',
+			'sound/mobs/humanoids/human/scream/malescream_1.ogg',
+			'sound/mobs/humanoids/human/scream/malescream_2.ogg',
+			'sound/mobs/humanoids/human/scream/malescream_3.ogg',
+			'sound/mobs/humanoids/human/scream/malescream_4.ogg',
+			'sound/mobs/humanoids/human/scream/malescream_5.ogg',
+			'sound/mobs/humanoids/human/scream/malescream_6.ogg',
 		)
 
 	return pick(
-		'sound/voice/human/femalescream_1.ogg',
-		'sound/voice/human/femalescream_2.ogg',
-		'sound/voice/human/femalescream_3.ogg',
-		'sound/voice/human/femalescream_4.ogg',
-		'sound/voice/human/femalescream_5.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_1.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_2.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_3.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_4.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_5.ogg',
 	)
 
 /datum/species/saiyan/on_species_gain(mob/living/carbon/human/human_who_gained_species, datum/species/old_species, pref_load)
@@ -79,7 +79,7 @@
 		return
 	if (attacker.zone_selected != BODY_ZONE_PRECISE_GROIN && attacker.zone_selected != BODY_ZONE_CHEST)
 		return
-	var/obj/item/organ/external/tail/saiyan_tail = target.get_organ_slot(ORGAN_SLOT_EXTERNAL_TAIL)
+	var/obj/item/organ/tail/saiyan_tail = target.get_organ_slot(ORGAN_SLOT_EXTERNAL_TAIL)
 	if (isnull(saiyan_tail) || !prob(3))
 		return
 	target.visible_message(span_warning("[target]'s tail falls to the ground, severed completely!"))
@@ -96,7 +96,7 @@
 /// When your tail is cut you get weaker
 /datum/species/saiyan/proc/on_tail_gained(mob/living/vegeta, obj/item/organ/tail)
 	SIGNAL_HANDLER
-	if (!istype(tail, /obj/item/organ/external/tail/monkey/saiyan))
+	if (!istype(tail, /obj/item/organ/tail/monkey/saiyan))
 		return
 	if (!vegeta.mob_mood.has_mood_of_category(SAIYAN_TAIL_MOOD))
 		return
@@ -107,7 +107,7 @@
 /// If your tail is restored you return to original strength
 /datum/species/saiyan/proc/on_tail_removed(mob/living/vegeta, obj/item/organ/tail)
 	SIGNAL_HANDLER
-	if (!istype(tail, /obj/item/organ/external/tail/monkey/saiyan))
+	if (!istype(tail, /obj/item/organ/tail/monkey/saiyan))
 		return
 	to_chat(vegeta, span_boldwarning("No! Your tail!!"))
 	vegeta.saiyan_boost(multiplier = -5)

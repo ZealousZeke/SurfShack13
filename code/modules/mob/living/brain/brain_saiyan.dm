@@ -1,7 +1,7 @@
 #define GOKU_FILTER "goku_filter"
 
 /// The Saiyan brain contains knowledge of powerful martial arts
-/obj/item/organ/internal/brain/saiyan
+/obj/item/organ/brain/saiyan
 	name = "saiyan brain"
 	desc = "The brain of a mighty saiyan warrior. Guess they don't work out at the library..."
 	brain_size = 0.5
@@ -16,7 +16,7 @@
 		/datum/action/cooldown/mob_cooldown/ultra_instinct,
 	)
 
-/obj/item/organ/internal/brain/saiyan/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
+/obj/item/organ/brain/saiyan/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
 	var/datum/action/cooldown/mob_cooldown/ki_blast/blast = new(organ_owner)
 	blast.Grant(organ_owner)
@@ -31,7 +31,7 @@
 	random_skill.Grant(organ_owner)
 	granted_abilities += random_skill
 
-/obj/item/organ/internal/brain/saiyan/on_mob_remove(mob/living/carbon/organ_owner, special)
+/obj/item/organ/brain/saiyan/on_mob_remove(mob/living/carbon/organ_owner, special)
 	. = ..()
 	QDEL_LIST(granted_abilities)
 
@@ -62,7 +62,7 @@
 /obj/item/gun/ki_blast
 	name = "concentrated ki"
 	desc = "The power of your lifeforce converted into a deadly weapon. Fire it at someone."
-	fire_sound = 'sound/magic/wand_teleport.ogg'
+	fire_sound = 'sound/effects/magic/wand_teleport.ogg'
 	icon = 'icons/obj/weapons/guns/projectiles.dmi'
 	icon_state = "pulse1"
 	inhand_icon_state = "arcane_barrage"
@@ -99,8 +99,8 @@
 	icon_state = "pulse1_bl"
 	damage = 3
 	damage_type = BRUTE
-	hitsound = 'sound/weapons/sear_disabler.ogg'
-	hitsound_wall = 'sound/weapons/sear_disabler.ogg'
+	hitsound = 'sound/items/weapons/sear_disabler.ogg'
+	hitsound_wall = 'sound/items/weapons/sear_disabler.ogg'
 	light_system = OVERLAY_LIGHT
 	light_range = 1
 	light_power = 1.4
@@ -377,7 +377,7 @@
 
 	lightbulb = owner.mob_light(5, 1, COLOR_GOLD)
 
-	playsound(owner, 'sound/magic/charge.ogg', vol = 80)
+	playsound(owner, 'sound/effects/magic/charge.ogg', vol = 80)
 
 	var/list/destroy_turfs = circle_range_turfs(center = owner, radius = 2)
 	for (var/turf/check_turf as anything in destroy_turfs)
