@@ -238,6 +238,8 @@ Basically, we fill the time between now and 2s from now with hands based off the
 	affected_mob.AddComponent(/datum/component/manual_blinking/overdrive)
 	ADD_TRAIT(affected_mob, TRAIT_XRAY_VISION, type)
 	affected_mob.update_sight()
+	if(effect_applied)
+		affected_mob.adjust_hallucinations(20 SECONDS * REM * seconds_per_tick)
 
 ///We're done - remove the curse
 /datum/reagent/inverse/aiuri/on_mob_end_metabolize(mob/living/affected_mob)
