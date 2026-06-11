@@ -108,16 +108,60 @@
 //Chloral Hydrate - Impure Version
 /datum/reagent/impurity/chloralax
 	name = "Chloralax"
-	description = "An oily, colorless and slightly toxic liquid. It is produced when impure choral hydrate is broken down inside an organism."
+	description = "A miracle cleaning solution and dental disenfectant. Can be used to dry and sanitize surfaces, while also having a mild antibiotic effect. It is somewhat toxic."
 	reagent_state = LIQUID
 	color = "#387774"
 	ph = 7
+	var/clean_types = CLEAN_WASH
 	liver_damage = 0
+	metabolization_rate = REAGENTS_METABOLISM
 
-/datum/reagent/impurity/chloralax/on_mob_life(mob/living/carbon/owner, seconds_per_tick)
+/datum/reagent/impurity/chloralax/on_mob_life(mob/living/carbon/M, seconds_per_tick, times_fired)
 	. = ..()
-	if(owner.adjustToxLoss(1 * REM * seconds_per_tick, updating_health = FALSE, required_biotype = affected_biotype))
-		return UPDATE_MOB_HEALTH
+
+	if(M.adjustToxLoss(2 * REM * seconds_per_tick, updating_health = FALSE, required_biotype = affected_biotype))
+		. = UPDATE_MOB_HEALTH
+
+	if((M.mob_biotypes & MOB_ORGANIC) && prob(0.3))
+		for(var/thing in M.diseases) // can clean viruses from organic lifeforms.
+			var/datum/disease/D = thing
+			D.cure()
+
+/datum/reagent/impurity/chloralax/expose_obj(obj/exposed_obj, reac_volume, methods=TOUCH, show_message=TRUE)
+	. = ..()
+	exposed_obj?.wash(clean_types)
+
+/datum/reagent/impurity/chloralax/expose_turf(turf/open/exposed_turf, reac_volume)
+	. = ..()
+	if(reac_volume < 1)
+		return
+
+	exposed_turf.wash(clean_types)
+	for(var/am in exposed_turf)
+		var/atom/movable/movable_content = am
+		if(ismopable(movable_content)) // Mopables will be cleaned anyways by the turf wash
+			continue
+		movable_content.wash(clean_types)
+
+	for(var/mob/living/basic/slime/exposed_slime in exposed_turf)
+		exposed_slime.adjustToxLoss(rand(5,10))
+
+	if(!istype(exposed_turf))
+		return
+	// We want one spray of this stuff (5u) to take out a wet floor. Feels better that way
+	exposed_turf.MakeDry(ALL, TRUE, reac_volume * 10 SECONDS)
+
+/datum/reagent/impurity/chloralax/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume, show_message=TRUE, touch_protection=0)
+	. = ..()
+	if(methods & (TOUCH|VAPOR))
+		exposed_mob.wash(clean_types)
+
+/datum/reagent/impurity/chloralax/on_burn_wound_processing(datum/wound/burn/flesh/burn_wound)
+	burn_wound.sanitization += 0.3
+	if(prob(5))
+		to_chat(burn_wound.victim, span_notice("Your [burn_wound] stings and burns from [src] covering it! It <i>does</i> look pretty clean though."))
+		burn_wound.victim.apply_damage(0.5, TOX)
+		burn_wound.victim.apply_damage(0.5, BURN, burn_wound.limb, wound_bonus = CANT_WOUND)
 
 //Mindbreaker Toxin - Impure Version
 /datum/reagent/impurity/rosenol
