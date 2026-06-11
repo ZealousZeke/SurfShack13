@@ -1668,6 +1668,8 @@
 	reagent_state = LIQUID
 	overdose_threshold = 50
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM //same as C2s
+	inverse_chem_val = 0.35
+	inverse_chem = /datum/reagent/impurity/healing/medicine_failure
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/medicine/granibitaluri/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
