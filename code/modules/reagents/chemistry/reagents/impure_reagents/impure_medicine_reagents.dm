@@ -220,7 +220,7 @@ Basically, we fill the time between now and 2s from now with hands based off the
 	description = "This reagent is known to interfere with the eyesight of a patient."
 	ph = 3.1
 	addiction_types = list(/datum/addiction/medicine = 1.5)
-	metabolization_rate = REM
+	metabolization_rate = 2 * REM
 	tox_damage = 0
 	var/effect_applied = FALSE
 
@@ -244,10 +244,6 @@ Basically, we fill the time between now and 2s from now with hands based off the
 ///We're done - remove the curse
 /datum/reagent/inverse/aiuri/on_mob_end_metabolize(mob/living/affected_mob)
 	qdel(affected_mob.GetComponent(/datum/component/manual_blinking/overdrive))
-
-	var/obj/item/organ/eyes/eyes = affected_mob.get_organ_slot(ORGAN_SLOT_EYES)
-	if(effect_applied)
-		eyes?.apply_organ_damage(-30)
 
 	REMOVE_TRAIT(affected_mob, TRAIT_XRAY_VISION, type)
 	affected_mob.update_sight()
