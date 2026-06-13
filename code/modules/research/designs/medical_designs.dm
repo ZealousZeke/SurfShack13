@@ -620,6 +620,10 @@
 		/datum/material/iron = SMALL_MATERIAL_AMOUNT*6,
 		/datum/material/glass = SMALL_MATERIAL_AMOUNT*6,
 		/datum/material/titanium = SMALL_MATERIAL_AMOUNT*3,
+		/datum/material/silver = SMALL_MATERIAL_AMOUNT*6,
+		/datum/material/gold = SMALL_MATERIAL_AMOUNT*6,
+		/datum/material/plasma = HALF_SHEET_MATERIAL_AMOUNT,
+		/datum/material/uranium = HALF_SHEET_MATERIAL_AMOUNT,
 	)
 	build_path = /obj/item/skillchip/self_surgery
 	category = list(
