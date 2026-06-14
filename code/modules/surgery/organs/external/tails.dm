@@ -187,7 +187,6 @@
 /datum/bodypart_overlay/mutant/tail/monkey/get_global_feature_list()
 	return SSaccessories.tails_list_monkey
 
-
 /obj/item/organ/tail/monkey/saiyan
 	name = "saiyan tail"
 	desc = "The severed tail of a mighty Saiyan warrior, the ultimate humiliation."
