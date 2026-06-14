@@ -264,7 +264,7 @@
 /datum/bodypart_overlay/mutant/tail/monkey/saiyan
 	feature_key = "tail_saiyan"
 
-/datum/bodypart_overlay/mutant/tail/saiyan/get_global_feature_list()
+/datum/bodypart_overlay/mutant/tail/monkey/saiyan/get_global_feature_list()
 	return SSaccessories.tails_list_saiyan
 
 /obj/item/organ/tail/lizard
